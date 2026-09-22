@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="CalcX - Scientific & Geometry Calculator with unit conversion, history, favorites, and formulas." />
+    <title>CalcX - Scientific & Geometry Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="topbar glass-panel">
+            <div class="brand-wrap">
+                <div class="brand-mark">C</div>
+                <div class="brand-copy">
+                    <h1>CalcX</h1>
+                    <small>Scientific & Geometry</small>
+                </div>
+            </div>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <button class="nav-btn active" data-target="scientific-section" type="button">Scientific</button>
+                <button class="nav-btn" data-target="geometry-section" type="button">Geometry</button>
+                <button class="nav-btn" data-target="three-d-section" type="button">3D Shapes</button>
+                <button class="nav-btn" data-target="converter-section" type="button">Converters</button>
+                <button class="nav-btn" data-target="history-section" type="button">History</button>
+            </nav>
+
+            <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle theme">🌙</button>
+        </header>
+
+        <main class="workspace">
+            <section class="main-panel glass-panel">
+                <div class="tab-panel active" id="scientific-section">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">Calculator Mode</p>
+                            <h2>Scientific Calculator</h2>
+                        </div>
+                        <div class="mode-toggle">
+                            <button class="mode-btn active" data-angle="deg" type="button">DEG</button>
+                            <button class="mode-btn" data-angle="rad" type="button">RAD</button>
+                        </div>
+                    </div>
+
+                    <div class="display-stack">
+                        <label class="sr-only" for="scientificInput">Scientific expression</label>
+                        <input id="scientificInput" type="text" autocomplete="off" spellcheck="false"
+                            placeholder="Enter expression..." />
+                        <div id="scientificResult" class="calc-result" aria-live="polite">0</div>
+                    </div>
+
+                    <div class="toolbar-row">
+                        <div class="memory-group">
+                            <button class="memory-btn" data-memory="mplus" type="button">M+</button>
+                            <button class="memory-btn" data-memory="mminus" type="button">M-</button>
+                            <button class="memory-btn" data-memory="mr" type="button">MR</button>
+                            <button class="memory-btn" data-memory="mc" type="button">MC</button>
+                        </div>
+                        <div class="utility-group">
+                            <label class="precision-control">
+                                <span>Precision</span>
+                                <select id="precisionSelect">
+                                    <option value="2">2 decimals</option>
+                                    <option value="4">4 decimals</option>
+                                    <option value="6">6 decimals</option>
+                                </select>
+                            </label>
+                            <button class="utility-btn" data-action="copy" type="button">Copy Result</button>
+                            <button class="utility-btn accent" data-action="favorite" type="button">Save
+                                Favorite</button>
+                        </div>
+                    </div>
+
+                    <div class="scientific-grid" aria-label="Scientific calculator keypad">
+                        <button class="scientific-key function" data-value="sin(" type="button">sin</button>
+                        <button class="scientific-key function" data-value="cos(" type="button">cos</button>
+                        <button class="scientific-key function" data-value="tan(" type="button">tan</button>
+                        <button class="scientific-key function" data-value="log(" type="button">log</button>
+                        <button class="scientific-key function" data-value="ln(" type="button">ln</button>
+                        <button class="scientific-key function" data-value="sqrt(" type="button">√</button>
+                        <button class="scientific-key function" data-value="cbrt(" type="button">∛</button>
+                        <button class="scientific-key operator" data-value="^" type="button">xʸ</button>
+
+                        <button class="scientific-key function" data-value="asin(" type="button">asin</button>
+                        <button class="scientific-key function" data-value="acos(" type="button">acos</button>
+                        <button class="scientific-key function" data-value="atan(" type="button">atan</button>
+                        <button class="scientific-key function" data-value="sinh(" type="button">sinh</button>
+                        <button class="scientific-key function" data-value="cosh(" type="button">cosh</button>
+                        <button class="scientific-key function" data-value="tanh(" type="button">tanh</button>
+                        <button class="scientific-key function" data-value="abs(" type="button">|x|</button>
+                        <button class="scientific-key function" data-value="floor(" type="button">floor</button>
+
+                        <button class="scientific-key function" data-value="ceil(" type="button">ceil</button>
+                        <button class="scientific-key function" data-value="factorial(" type="button">n!</button>
+                        <button class="scientific-key function" data-value="1/" type="button">1/x</button>
+                        <button class="scientific-key function" data-value="pi" type="button">π</button>
+                        <button class="scientific-key function" data-value="e" type="button">e</button>
+                        <button class="scientific-key function" data-value="phi" type="button">φ</button>
+                        <button class="scientific-key function" data-value="10^" type="button">10ˣ</button>
+                        <button class="scientific-key operator" data-value="%" type="button">%</button>
+
+                        <button class="scientific-key operator" data-value="(" type="button">(</button>
+                        <button class="scientific-key operator" data-value=")" type="button">)</button>
+                        <button class="scientific-key operator" data-value="/" type="button">÷</button>
+                        <button class="scientific-key operator" data-value="*" type="button">×</button>
+                        <button class="scientific-key operator" data-value="-" type="button">−</button>
+                        <button class="scientific-key operator" data-value="+" type="button">+</button>
+                        <button class="scientific-key action" data-action="clear" type="button">AC</button>
+                        <button class="scientific-key action" data-action="backspace" type="button">⌫</button>
+
+                        <button class="scientific-key number" data-value="7" type="button">7</button>
+                        <button class="scientific-key number" data-value="8" type="button">8</button>
+                        <button class="scientific-key number" data-value="9" type="button">9</button>
+                        <button class="scientific-key function" data-value="pow(10," type="button">10^x</button>
+                        <button class="scientific-key number" data-value="4" type="button">4</button>
+                        <button class="scientific-key number" data-value="5" type="button">5</button>
+                        <button class="scientific-key number" data-value="6" type="button">6</button>
+                        <button class="scientific-key function" data-value="^2" type="button">x²</button>
+
+                        <button class="scientific-key number" data-value="1" type="button">1</button>
+                        <button class="scientific-key number" data-value="2" type="button">2</button>
+                        <button class="scientific-key number" data-value="3" type="button">3</button>
+                        <button class="scientific-key function" data-value="^3" type="button">x³</button>
+                        <button class="scientific-key number" data-value="0" type="button">0</button>
+                        <button class="scientific-key number" data-value="." type="button">.</button>
+                        <button class="scientific-key operation" data-action="negate" type="button">±</button>
+                        <button class="scientific-key action primary" data-action="calculate" type="button">=</button>
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="geometry-section">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">2D Shapes</p>
+                            <h2>Geometry Calculator</h2>
+                        </div>
+                    </div>
+
+                    <div class="shape-selector" id="geometrySelector"></div>
+                    <div id="geometryForm" class="shape-form"></div>
+
+                    <div class="derived-section">
+                        <div class="panel-header compact-header">
+                            <div>
+                                <p class="eyebrow">Derived Values</p>
+                                <h3>Height, Width & Distance</h3>
+                            </div>
+                        </div>
+                        <div id="derivedCalculators" class="derived-grid"></div>
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="three-d-section">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">3D Shapes</p>
+                            <h2>Volume & Surface Area</h2>
+                        </div>
+                    </div>
+
+                    <div class="shape-selector" id="threeDSelector"></div>
+                    <div id="threeDForm" class="shape-form"></div>
+                </div>
+
+                <div class="tab-panel" id="converter-section">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">Unit Converter</p>
+                            <h2>Convert Measurements</h2>
+                        </div>
+                    </div>
+
+                    <div class="converter-card">
+                        <div class="field-row">
+                            <label>
+                                Category
+                                <select id="converterCategory">
+                                    <option value="length">Length</option>
+                                    <option value="area">Area</option>
+                                    <option value="volume">Volume</option>
+                                    <option value="weight">Weight</option>
+                                    <option value="temperature">Temperature</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="field-row two-col">
+                            <label>
+                                From
+                                <select id="fromUnit"></select>
+                            </label>
+                            <label>
+                                To
+                                <select id="toUnit"></select>
+                            </label>
+                        </div>
+
+                        <div class="field-row">
+                            <label>
+                                Value
+                                <input id="convertInput" type="number" step="any" placeholder="Enter value" />
+                            </label>
+                        </div>
+
+                        <div class="action-row">
+                            <button id="convertBtn" class="primary-btn" type="button">Convert</button>
+                            <button id="convertResetBtn" class="secondary-btn" type="button">Reset</button>
+                        </div>
+
+                        <div class="result-box converter-output">
+                            <span class="label">Converted Value</span>
+                            <strong id="convertedResult">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="history-section">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">Records</p>
+                            <h2>Calculation History</h2>
+                        </div>
+                    </div>
+
+                    <div class="history-layout">
+                        <div class="history-core">
+                            <div id="historyListStandalone" class="history-list large"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="side-panel glass-panel">
+                <div class="result-card">
+                    <div class="card-head split-head">
+                        <h3>Result</h3>
+                        <button id="copyResultBtn" class="mini-btn" type="button">Copy Result</button>
+                    </div>
+                    <div id="globalResult" class="result-value">0</div>
+                    <div class="result-actions">
+                        <button id="saveFavoriteBtn" class="secondary-btn" type="button">Save Favorite</button>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <div class="card-head">
+                        <h3>Formula Reference</h3>
+                    </div>
+                    <div id="formulaDisplay" class="formula-display">Select a shape to view formulas.</div>
+                </div>
+
+                <div class="history-card">
+                    <div class="card-head split-head">
+                        <h3>Recent History</h3>
+                        <button id="clearHistoryBtn" class="mini-btn warn" type="button">Clear</button>
+                    </div>
+                    <ul id="historyList" class="history-list"></ul>
+                </div>
+
+                <div class="favorites-card">
+                    <div class="card-head">
+                        <h3>Favorites</h3>
+                    </div>
+                    <ul id="favoritesList" class="favorites-list"></ul>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
