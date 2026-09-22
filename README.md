@@ -26,3 +26,6 @@ A responsive scientific calculator built using HTML, CSS and JavaScript.
 ## Author
 
 Abhishek
+
+App is deplpyed =   https://scientific-calculator-6swg.onrender.com
+
