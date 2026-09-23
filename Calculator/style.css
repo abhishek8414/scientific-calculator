@@ -44,11 +44,16 @@ body.dark {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  min-width: 320px;
+  max-width: 100%;
+  overflow-x: hidden;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background:
     radial-gradient(circle at top left, rgba(91, 110, 244, 0.18), transparent 28%),
@@ -56,6 +61,12 @@ body {
     var(--bg);
   color: var(--text);
   transition: background 0.25s ease, color 0.25s ease;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
 button,
@@ -66,6 +77,7 @@ select {
 
 button {
   cursor: pointer;
+  min-height: 44px;
 }
 
 button:hover {
@@ -76,8 +88,36 @@ button:active {
   transform: translateY(0);
 }
 
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(91, 110, 244, 0.22);
+  outline-offset: 2px;
+}
+
+.app-shell,
+.workspace,
+.main-panel,
+.side-panel,
+.topbar,
+.display-stack,
+.scientific-grid,
+.result-card,
+.formula-card,
+.history-card,
+.favorites-card,
+.derived-card,
+.converter-card,
+.shape-card,
+.shape-form,
+.history-list,
+.favorites-list {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .app-shell {
-  width: min(1480px, calc(100% - 32px));
+  width: min(1400px, calc(100% - clamp(16px, 2vw, 32px)));
   margin: 22px auto 32px;
 }
 
@@ -661,9 +701,15 @@ select:focus {
   border: 0;
 }
 
-@media (max-width: 1040px) {
+@media (max-width: 1024px) {
   .workspace {
     grid-template-columns: 1fr;
+  }
+
+  .main-panel,
+  .side-panel {
+    width: 100%;
+    max-width: 100%;
   }
 
   .side-panel {
@@ -673,11 +719,40 @@ select:focus {
   .main-panel {
     order: 1;
   }
+
+  .topbar {
+    padding: 16px 18px;
+  }
+
+  .main-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    padding-bottom: 4px;
+  }
+
+  .toolbar-row,
+  .action-row,
+  .result-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .memory-group,
+  .utility-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .scientific-grid {
+    gap: 8px;
+  }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .app-shell {
-    width: min(100% - 18px, 100%);
+    width: min(100% - 14px, 100%);
     margin-top: 12px;
   }
 
@@ -690,17 +765,257 @@ select:focus {
     justify-content: center;
   }
 
-  .main-nav {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 4px;
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mode-toggle {
+    align-self: stretch;
+    justify-content: center;
   }
 
   .scientific-grid {
-    grid-template-columns: repeat(4, minmax(52px, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
   }
 
-  .two-col {
+  .scientific-key {
+    min-height: clamp(46px, 7vw, 58px);
+  }
+
+  .two-col,
+  .field-row.two-col {
     grid-template-columns: 1fr;
+  }
+
+  .memory-group {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .utility-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .precision-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .primary-btn,
+  .secondary-btn,
+  .utility-btn,
+  .memory-btn,
+  .mode-btn,
+  .nav-btn,
+  .mini-btn {
+    width: 100%;
+  }
+
+  .utility-btn,
+  .primary-btn,
+  .secondary-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-panel,
+  .side-panel {
+    padding: 12px;
+  }
+
+  .topbar {
+    padding: 12px 14px;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .brand-wrap {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+
+  .brand-copy h1 {
+    font-size: 1.35rem;
+  }
+
+  .brand-copy small {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .main-nav {
+    gap: 6px;
+  }
+
+  .nav-btn {
+    padding: 9px 12px;
+    font-size: 0.82rem;
+  }
+
+  .display-stack {
+    padding: 12px;
+    border-radius: 14px;
+    margin-bottom: 14px;
+  }
+
+  #scientificInput {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .calc-result {
+    min-height: 42px;
+    font-size: 1.25rem;
+  }
+
+  .toolbar-row,
+  .action-row,
+  .result-actions {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .memory-group {
+    gap: 6px;
+  }
+
+  .memory-btn,
+  .utility-btn,
+  .primary-btn,
+  .secondary-btn,
+  .mini-btn,
+  .mode-btn,
+  .nav-btn {
+    border-radius: 10px;
+    min-height: 44px;
+    padding: 10px 12px;
+  }
+
+  .precision-control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .precision-control select {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .scientific-grid {
+    gap: 7px;
+  }
+
+  .scientific-key {
+    min-height: 46px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+  }
+
+  .shape-selector {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .shape-card {
+    padding: 12px 10px;
+  }
+
+  .result-card,
+  .formula-card,
+  .history-card,
+  .favorites-card,
+  .derived-card,
+  .converter-card {
+    border-radius: 14px;
+    padding: 12px;
+  }
+
+  .result-value {
+    min-height: 48px;
+    font-size: clamp(1.15rem, 6vw, 1.7rem);
+  }
+
+  .formula-display,
+  .history-expression,
+  .favorite-expression,
+  .formula-item {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  input,
+  select {
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .app-shell {
+    width: min(100% - 10px, 100%);
+    margin-top: 10px;
+  }
+
+  .main-panel,
+  .side-panel {
+    padding: 10px;
+  }
+
+  .panel-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  .scientific-grid {
+    gap: 6px;
+  }
+
+  .scientific-key {
+    min-height: 44px;
+    font-size: 0.82rem;
+  }
+
+  .memory-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .utility-group,
+  .action-row,
+  .result-actions,
+  .toolbar-row {
+    width: 100%;
+  }
+
+  .precision-control,
+  .utility-btn,
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+  }
+
+  .shape-selector {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .history-meta,
+  .favorite-meta {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
